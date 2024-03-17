@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex 11</title>
+</head>
+<body>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function Form(){
+        let valorR, cotacao, resultado
+
+            // Criando referências para elementos do componente com useRef()
+            const valorRRef = React.useRef()
+            const cotacaoRef = React.useRef()
+            const resultadoRef = React.useRef()
+
+            function handleChange(event) {
+                valorR = parseFloat(valorRRef.current.value)
+                cotacao = parseFloat(cotacaoRef.current.value)
+                resultado = valorR / cotacao
+
+                
+            }
+
+            function handleSubmit(event) {
+                event.preventDefault()
+                resultadoRef.current.textContent = resultado
+                alert(`O valor em dólares é, U$${resultado}`)
+            }
+
+        return (
+            <>
+                <h1>Formulário React</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>
+                                <span>Valor em Reais</span>
+                                <input ref={valorRRef} onChange={handleChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <span>Cotação do dólar</span>
+                                <input ref={cotacaoRef} onChange={handleChange} />
+                            </label>
+                        </div>
+                        <div ref={resultadoRef}></div>
+                        <div>
+                            <button type="submit">Enviar</button>
+                        </div>
+                    </form>
+            </>
+        )
+    }
+
+    const container = <> <Form/> </>
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(container)
+
+    /*
+      1) Crie um formulário e coloque nele um input numérico com o label "Valor em reais". X
+      2) Coloque outro input numérico com o label "Cotação do dólar".  X
+      3) Coloque, também, uma div para exibir o resultado da conversão de moeda.  X 
+      4) Crie e coloque hooks useRef nos três elementos criados.  X
+      5) Escreva uma única função handleChange para interceptar a mundança nos dois inputs
+         e atualizar variáveis quando o respectivo valor mudar. X
+      6) Usando as variáveis que foram atualizadas em handleChange, exiba na div de resultado
+         o valor convertido. X
+      
+      Este exercício contará para a nota de Participação e Assiduidade (PA).
+    */
+
+  </script>
+  
+</body>
+</html>
